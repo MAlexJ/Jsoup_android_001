@@ -1,30 +1,59 @@
 package com.example.root.jsoup_android_001;
 
-import android.os.AsyncTask;
+
+import android.graphics.Bitmap;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import entity.ProductCatalog;
-import service.JsoupCatalogService;
 
+import java.util.List;
+
+import entity.Catalog;
+import entity.ProductCatalog;
 
 public class MainActivity extends ActionBarActivity {
+    private ProductCatalog productCatalogList;
+    private List<Catalog> catalogList;
+    private String[] nameCatalog;
+    private String[] imageCatalog;
 
-    private Button button;
-    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = (Button)findViewById(R.id.button);
-        textView = (TextView)findViewById(R.id.textView);
+        productCatalogList = (ProductCatalog) getIntent().getSerializableExtra("productCatalogList");
+        catalogList = productCatalogList.getCatalogList();
+
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linactiv_main_03);
+        LayoutInflater layoutInflater = getLayoutInflater();
+
+        nameCatalog = new String[catalogList.size()];
+        imageCatalog = new String[catalogList.size()];
+        for (int i = 0; i < catalogList.size(); i++) {
+            Catalog catalog = catalogList.get(i);
+            nameCatalog[i] = catalog.getName();
+            imageCatalog[i] = catalog.getImage();
+        }
+
+
+        for (int i = 0; i < nameCatalog.length; i++) {
+            View item = layoutInflater.inflate(R.layout.intent_product_catalog, linearLayout, false);
+            TextView tvName = (TextView) item.findViewById(R.id.text_item_product_catalog);
+            tvName.setText(nameCatalog[i]);
+            linearLayout.addView(item);
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,37 +76,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    public void ClickMe(View v) {
-        JsoupService js = new JsoupService();
-        js.execute();
-    }
-
-    class JsoupService extends AsyncTask<Void, Void, Void> {
-
-        String title;//Тут храним значение заголовка сайта
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            //Тут пишем основной код
-            JsoupCatalogService jsoupCatalogService = new JsoupCatalogService();
-            jsoupCatalogService.init();
-            ProductCatalog productCatalogList = jsoupCatalogService.getProductCatalogList();
-            title = productCatalogList.getCatalogList().toString();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            //Тут выводим итоговые данные
-            textView.setText(title);
-        }
-    }
-
-
-
 }
 
 

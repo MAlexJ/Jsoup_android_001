@@ -1,6 +1,8 @@
 package entity;
 
-public class Catalog {
+import java.io.Serializable;
+
+public class Catalog implements Serializable {
     private String id;
     private String name;
     private String image;

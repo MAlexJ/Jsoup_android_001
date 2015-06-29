@@ -8,18 +8,86 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-    <Button
-        android:id="@+id/button"
+    <LinearLayout
+        android:id="@+id/linactiv_main_01"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/button"
-        android:onClick="ClickMe" />
+        android:layout_height="50dp"
+        android:background="#222"
+        android:orientation="horizontal">
+<FrameLayout
+    android:layout_margin="10dp"
+    android:background="#555"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <TextView
+            android:text="@string/catalog_product"
+            android:textColor="#ffffffff"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+</FrameLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrol_activ_layout_01"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linactiv_main_01"
+        android:background="#555">
+
+        <LinearLayout
+            android:id="@+id/linactiv_main_03"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/linactiv_main_02"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/scrol_activ_layout_01"
+        android:background="#222"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_margin="10dp"
+            android:background="#555"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/frameLayout">
+            <TextView
+                android:text="@string/popular_product"
+                android:textColor="#ffffffff"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:background="#ff9b9b9b"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/frameLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

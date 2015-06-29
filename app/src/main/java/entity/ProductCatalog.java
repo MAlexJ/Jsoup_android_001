@@ -1,10 +1,11 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ProductCatalog {
+public class ProductCatalog implements Serializable{
 
     private List<Catalog> catalogList = new ArrayList<Catalog>();
 

@@ -18,15 +18,15 @@ public class JsoupCatalogService implements Constants {
     private ProductCatalog productCatalogList = new ProductCatalog();
 
 
-    public void init() {
+    public void init(int timeout) {
         try {
-            docCatalogHTML = Jsoup.connect(Constants.productCatalog).timeout(2000).get();
+            docCatalogHTML = Jsoup.connect(Constants.productCatalog).timeout(timeout).get();
             catalogHTML = docCatalogHTML.select(Constants.productCatalogSelectorCSS).html();
             parceContext(catalogHTML);
         } catch (IOException e) {
-            e.printStackTrace();
+            if (timeout<5000) init(timeout * 2);
+            else throw new RuntimeException("My Exception -> Ошибка соединения с интернетом");
         }
-
     }
 
     public ProductCatalog getProductCatalogList() {
